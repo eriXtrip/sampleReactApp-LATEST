@@ -133,7 +133,7 @@ const SubjectPage = () => {
       setProgress(progressPercent);
 
     } catch (err) {
-      console.error("❌ Error fetching lessons/achievements:", err);
+      console.log("❌ Error fetching lessons/achievements:", err);
     }
   };
 
@@ -212,7 +212,7 @@ const SubjectPage = () => {
       clearSelection();
 
     } catch (err) {
-      console.error("❌ Error marking lessons done:", err);
+      console.log("❌ Error marking lessons done:", err);
     }
   };
 
@@ -246,7 +246,7 @@ const SubjectPage = () => {
       clearSelection();
 
     } catch (err) {
-      console.error("❌ Error marking lessons undone:", err);
+      console.log("❌ Error marking lessons undone:", err);
     }
   };
 
@@ -343,16 +343,16 @@ const SubjectPage = () => {
               [c.fileName, c.content_id]
             );
           } catch (e) {
-            console.warn('Failed to update subject_contents after download', e);
+            console.log('Failed to update subject_contents after download', e);
           }
         } else {
           updateDownload(c.content_id, { status: 'failed', progress: 0 });
-          console.warn('Download failed for', c);
+          console.log('Download failed for', c);
         }
       });
 
     } catch (err) {
-      console.error('❌ Download error:', err);
+      console.log('❌ Download error:', err);
     } finally {
       setDownloading(false);
       await fetchLessonsAndAchievements();
@@ -401,7 +401,7 @@ const SubjectPage = () => {
         [lessonId]
       );
     } catch (err) {
-      console.error("❌ Error loading contents for lesson:", err);
+      console.log("❌ Error loading contents for lesson:", err);
       return [];
     }
   };
@@ -440,17 +440,19 @@ const SubjectPage = () => {
           if (selectionMode) {
             toggleSelect(item.lesson_id); // ✅ only toggle this item
           } else if (!isLocked) {
-            router.push({
-              pathname: '/lesson_page',
-              params: {
-                id: item.lesson_id,
-                lesson_number: item.lesson_number,
-                accentColor: encodeURIComponent(accentColor),
-                title: item.title,
-                description: item.description,
-                Quarter: item.Quarter,
-              },
-            });
+            setTimeout(() => {
+              router.push({
+                pathname: '/lesson_page',
+                params: {
+                  id: item.lesson_id,
+                  lesson_number: item.lesson_number,
+                  accentColor: encodeURIComponent(accentColor),
+                  title: item.title,
+                  description: item.description,
+                  Quarter: item.Quarter,
+                },
+              });
+            }, 500);
           }
         }}
         onLongPress={() => {

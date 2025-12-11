@@ -19,7 +19,7 @@ export default function DatabaseBinder() {
         markDbInitialized(); // single injection point
         console.log('DatabaseBinder: DB initialized and UserService set');
       } catch (e) {
-        console.error('DatabaseBinder init error', e);
+        console.log('DatabaseBinder init error', e);
       }
     })();
     return () => { mounted = false; };

@@ -95,7 +95,7 @@ export async function saveSyncDataToSQLite(data, db) {
           [l.subject_belong]
         );
         if (!localSubject) {
-          console.warn("Skipping lesson (subject not found):", l.lesson_id);
+          console.log("Skipping lesson (subject not found):", l.lesson_id);
           continue;
         }
 
@@ -141,7 +141,7 @@ export async function saveSyncDataToSQLite(data, db) {
           [c.lesson_belong]
         );
         if (!localLesson) {
-          console.warn("Skipping content (lesson not found):", c.content_id);
+          console.log("Skipping content (lesson not found):", c.content_id);
           continue;
         }
 
@@ -354,8 +354,8 @@ export async function saveSyncDataToSQLite(data, db) {
               ]
             );
           } catch (error) {
-            console.error("❌ Error in PUPIL_ACHIEVEMENTS table:", error.message);
-            console.error("Data:", ach);
+            console.log("❌ Error in PUPIL_ACHIEVEMENTS table:", error.message);
+            console.log("Data:", ach);
             throw error;
           }
         }
@@ -406,7 +406,7 @@ export async function saveSyncDataToSQLite(data, db) {
 
     console.log("✅ Sync data saved to SQLite (transaction committed)");
   } catch (error) {
-    console.error("❌ Sync failed, rolling back:", error);
+    console.log("❌ Sync failed, rolling back:", error);
     throw error;
   }
 }

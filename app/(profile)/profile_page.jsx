@@ -70,7 +70,7 @@ const ProfilePage = () => {
           setPoints(latestUser.pupil_points || 0);
         }
       } catch (err) {
-        console.error('Failed to fetch latest user', err);
+        console.log('Failed to fetch latest user', err);
       }
     };
 
@@ -114,7 +114,7 @@ const ProfilePage = () => {
       Alert.alert('Saved', 'Profile updated successfully.', [{ text: 'OK' }]);
       router.back();
     } catch (err) {
-      console.error('Save failed', err);
+      console.log('Save failed', err);
       Alert.alert('Error', 'Could not save profile. Please try again.');
     } finally {
       setSaving(false);

@@ -92,7 +92,7 @@ const SubjectList = () => {
         // 4. Combine everything
         setCombinedData([...sectionData, ...standaloneData]);
       } catch (err) {
-        console.error("❌ Error fetching sections/subjects:", err);
+        console.log("❌ Error fetching sections/subjects:", err);
       }
     };
 
@@ -107,14 +107,16 @@ const SubjectList = () => {
       return(
         <TouchableOpacity
           onPress={() =>
-            router.push({
-              pathname: '/subject_page',
-              params: { 
-                subject_id: item.id,   // ✅ pass subject_id
-                name: item.title, 
-                grade: item.grade
-              },
-            })
+            setTimeout(() => {
+              router.push({
+                pathname: '/subject_page',
+                params: { 
+                  subject_id: item.id,   // ✅ pass subject_id
+                  name: item.title, 
+                  grade: item.grade
+                },
+              });
+            }, 500) // 500ms delay
           }
         >
           <View style={[styles.subjectBox, { backgroundColor: theme.background, borderColor: theme.cardBorder }]}>
@@ -140,15 +142,17 @@ const SubjectList = () => {
       <View>
         <TouchableOpacity
           onPress={() => 
-            router.push({ 
-              pathname: '/section_page', 
-              params: { 
-                section_id: item.id,  
-                name: item.name, 
-                createdBy: item.adviser,
-                schoolYear: item.school_year
-              },
-            })
+            setTimeout(() => {
+              router.push({ 
+                pathname: '/section_page', 
+                params: { 
+                  section_id: item.id,  
+                  name: item.name, 
+                  createdBy: item.adviser,
+                  schoolYear: item.school_year
+                },
+              });
+            }, 500)
           }
           style={[styles.sectionContainer, { backgroundColor: theme.background, borderColor: theme.cardBorder }]}
         >

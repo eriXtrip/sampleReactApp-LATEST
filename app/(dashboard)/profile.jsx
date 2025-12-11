@@ -76,7 +76,7 @@ const Profile = () => {
         showThemedAlert('Server not reachable. Please try again.');
       }
     } catch (error) {
-      console.error('Logout error:', error);
+      console.log('Logout error:', error);
       showThemedAlert('Unexpected error occurred. Please try again.');
     } finally {
       // Defer stopping loading

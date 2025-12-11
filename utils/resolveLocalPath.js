@@ -17,7 +17,7 @@ export const ensureLessonsDir = async () => {
     }
     return LESSONS_DIR;
   } catch (e) {
-    console.error('❌ Error creating lessons folder:', e);
+    console.log('❌ Error creating lessons folder:', e);
     return null;
   }
 };

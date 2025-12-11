@@ -14,7 +14,7 @@ export async function saveAchievementAndUpdateContent(db, gameBadge, content_id)
     // get current user_id
     const userRow = await safeGetFirst(db, `SELECT user_id FROM users LIMIT 1`);
     if (!userRow) {
-      console.warn("No user found in users table.");
+      console.log("No user found in users table.");
       return;
     }
     const pupilId = userRow.user_id;
@@ -61,6 +61,6 @@ export async function saveAchievementAndUpdateContent(db, gameBadge, content_id)
     showSuccessToast('Badge recieved!', `You earn ${gameBadge.title}!`);
 
   } catch (err) {
-    console.error("❌ Failed to save achievement/update content:", err);
+    console.log("❌ Failed to save achievement/update content:", err);
   }
 }

@@ -22,7 +22,7 @@ export function SearchProvider({ children }) {
           setApiUrl(url);
           console.log('✅ API URL resolved:', url);
         } catch (err) {
-          //console.error("❌ Logout failed:", logoutError);('❌ Failed to get API URL:', err);
+          //console.log("❌ Logout failed:", logoutError);('❌ Failed to get API URL:', err);
           setError('Configuration error');
         }
       })();
@@ -31,7 +31,7 @@ export function SearchProvider({ children }) {
 
   const fetchPublicSubjects = useCallback(async (userId) => {
     if (!API_URL || !userId) {
-      console.warn('⚠️ Missing API_URL or userId in fetchPublicSubjects');
+      console.log('⚠️ Missing API_URL or userId in fetchPublicSubjects');
       return;
     }
 
@@ -55,7 +55,7 @@ export function SearchProvider({ children }) {
       console.log('✅ Subjects received:', data.subjects);
       setSubjects(data.subjects || []);
     } catch (err) {
-      //console.error("❌ Logout failed:", logoutError);('❌ Error fetching public subjects:', err);
+      //console.log("❌ Logout failed:", logoutError);('❌ Error fetching public subjects:', err);
       setError(err.message || 'Unable to load subjects');
       setSubjects([]);
     } finally {
@@ -66,7 +66,7 @@ export function SearchProvider({ children }) {
   const fetchAvailableSections = useCallback(async (userId) => {
     if (!API_URL || !userId) {
       consolle.log('userId and API_URL: ', userId , API_URL);
-      console.warn('⚠️ Missing API_URL or userId');
+      console.log('⚠️ Missing API_URL or userId');
       return;
     }
 
@@ -88,7 +88,7 @@ export function SearchProvider({ children }) {
       console.log('✅ Sections received:', data.sections);
       setSections(data.sections || []);
     } catch (err) {
-      //console.error("❌ Logout failed:", logoutError);('❌ Error fetching sections:', err);
+      //console.log("❌ Logout failed:", logoutError);('❌ Error fetching sections:', err);
       setError(err.message || 'Unable to load sections');
       setSections([]);
     } finally {

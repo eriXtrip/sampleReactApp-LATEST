@@ -54,7 +54,7 @@ export default function AngleHuntScreen() {
         }
         setGameData(parsed);
       } catch (err) {
-        console.error("Failed to load JSON:", err);
+        console.log("Failed to load JSON:", err);
         alert("Unable to load game JSON.");
       }
     };

@@ -97,7 +97,7 @@ const RecentActivityPage = () => {
 
         setActivities(formatted);
       } catch (err) {
-        console.error('Failed to load recent activity:', err);
+        console.log('Failed to load recent activity:', err);
         setActivities([]);
       }
     };

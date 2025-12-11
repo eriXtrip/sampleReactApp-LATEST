@@ -70,11 +70,11 @@ class AppLifecycleManager {
           await this.dbInstance.getFirstAsync('SELECT 1');
           console.log('✅ Database connection verified');
         } catch (err) {
-          console.error('❌ Database connection lost, may need reinitialize:', err.message);
+          console.log('❌ Database connection lost, may need reinitialize:', err.message);
         }
       }
     } catch (err) {
-      console.error('❌ Error on app foreground:', err);
+      console.log('❌ Error on app foreground:', err);
     }
   };
 
@@ -108,7 +108,7 @@ class AppLifecycleManager {
       console.log('🔓 Forcefully released sync lock for background');
 
     } catch (err) {
-      console.error('❌ Error on app background:', err);
+      console.log('❌ Error on app background:', err);
       // Even on error, make sure to release locks
       dbMutex.forceRelease('sync');
     }

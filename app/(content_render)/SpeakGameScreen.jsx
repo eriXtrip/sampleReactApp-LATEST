@@ -66,7 +66,7 @@ export default function SpeakGameScreen() {
         const selectedVoice = voices.find(v => v.language === "en-US")?.identifier || null;
         setVoiceIdentifier(selectedVoice);
       } catch (err) {
-        console.error("Failed to load speak JSON:", err);
+        console.log("Failed to load speak JSON:", err);
         Alert.alert("Error", "Unable to load game file.");
       }
     };

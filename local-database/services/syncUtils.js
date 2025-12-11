@@ -10,6 +10,6 @@ export async function markUnsynced(db, tableName, localId) {
     );
     console.log(`Marked ${tableName} (rowid: ${localId}) as unsynced`);
   } catch (error) {
-    console.error(`Failed to mark ${tableName} as unsynced:`, error);
+    console.log(`Failed to mark ${tableName} as unsynced:`, error);
   }
 }

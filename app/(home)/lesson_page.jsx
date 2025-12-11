@@ -85,7 +85,7 @@ const LessonPage = () => {
 
         setLessonContents(sorted);
       } catch (err) {
-        console.error("❌ Error fetching lesson contents:", err);
+        console.log("❌ Error fetching lesson contents:", err);
       }
     };
 
@@ -122,8 +122,8 @@ const LessonPage = () => {
         onPress={async () => {
           if (locked) return;
 
-          // Wait for 300ms before navigating
-          await wait(300);
+          // Wait for 500ms before navigating
+          await wait(500);
 
           router.push({
             pathname: "/content_details",

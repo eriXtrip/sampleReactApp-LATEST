@@ -128,7 +128,7 @@ const ContentDetails = () => {
         }
 
       } catch (err) {
-        console.error("❌ Error fetching contents:", err);
+        console.log("❌ Error fetching contents:", err);
       }
     };
 
@@ -213,7 +213,7 @@ const ContentDetails = () => {
 
       console.log(`📘 Lesson ${lesson_belong} updated: progress=${progress}, status=${lessonStatus}`);
     } catch (err) {
-      console.error("❌ Error in handleMarkAsDone:", err);
+      console.log("❌ Error in handleMarkAsDone:", err);
     }
 
     router.setParams({ status: newState ? "true" : "false" });
@@ -268,7 +268,7 @@ const ContentDetails = () => {
           updateDownload(item.content_id, { status: 'failed', progress: 0 });
         }
       } catch (err) {
-        console.error("❌ Error marking as downloaded:", err);
+        console.log("❌ Error marking as downloaded:", err);
         updateDownload(item.content_id, { status: 'failed', progress: 0 });
       }
     }
@@ -294,7 +294,7 @@ const ContentDetails = () => {
       );
       console.log(`✅ Updated last_accessed for content_id ${content_id}: ${now}`);
     } catch (err) {
-      console.error("❌ Error updating last_accessed:", err);
+      console.log("❌ Error updating last_accessed:", err);
     }
 
     // --- For documents (pdf, ppt, pptx) ---
@@ -323,18 +323,20 @@ const ContentDetails = () => {
       try {
         const fileInfo = await FileSystem.getInfoAsync(localPath);
         const actualUri = fileInfo.exists ? localPath : url;
-        router.push({
-          pathname: jsonRoutes[content_type],
-          params: { 
-            uri: actualUri, 
-            title, 
-            content_id,
-            practice,  
-          },
-        });
+        setTimeout(() => {
+          router.push({
+            pathname: jsonRoutes[content_type],
+            params: { 
+              uri: actualUri, 
+              title, 
+              content_id,
+              practice,  
+            },
+          });
+        }, 500);
         console.log(`Loaded ${content_type} at ${actualUri}`);
       } catch (err) {
-        console.error(`${content_type} load error:`, err);
+        console.log(`${content_type} load error:`, err);
         // Alert.alert("Error", `Unable to open ${content_type}.`);
         showErrorToast(`Unable to open ${content_type}.`, 'Please try again');
       }
@@ -359,7 +361,7 @@ const ContentDetails = () => {
         }
       }
     } catch (err) {
-      console.error('Open file error:', err);
+      console.log('Open file error:', err);
       // Alert.alert('Error', 'No app found to open this file. Please install a compatible app.');
       showErrorToast(`No app found to open this file.`, 'Please install a compatible app.');
       

@@ -28,7 +28,13 @@ const ThemedHeader = ({ options, navigation }) => {
       }}
     >
       {navigation.canGoBack() && (
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity
+          onPress={() => {
+            setTimeout(() => {
+              navigation.goBack();
+            }, 500); // 500ms delay
+          }}
+        >
           <Ionicons name="chevron-back" size={30} color={theme.title} />
         </TouchableOpacity>
       )}

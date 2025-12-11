@@ -54,7 +54,7 @@ export function UserProvider({ children }) {
   useEffect(() => {
     const initDb = async () => {
       if (!db) {
-        console.warn("⏳ Database not ready yet in UserContext");
+        console.log("⏳ Database not ready yet in UserContext");
         return;
       }
 
@@ -65,7 +65,7 @@ export function UserProvider({ children }) {
           UserService.setDatabase(db);
           console.log("✅ Database initialized successfully (UserContext)");
         } catch (error) {
-          //console.error("❌ Logout failed:", logoutError);("❌ Database initialization error in UserContext:", error);
+          //console.log("❌ Logout failed:", logoutError);("❌ Database initialization error in UserContext:", error);
         } finally {
           setDbInitialized(true);
         }
@@ -141,7 +141,7 @@ export function UserProvider({ children }) {
         throw new Error('API_URL not set yet');
       }
       if (!db) {
-        console.warn('⚠️ login: local db (useSQLiteContext) is not available. Aborting sync steps.');
+        console.log('⚠️ login: local db (useSQLiteContext) is not available. Aborting sync steps.');
       }
 
       // clear previous user rows (if DB available)
@@ -151,7 +151,7 @@ export function UserProvider({ children }) {
       //     await UserService.clearUserData(db); // pass db or fallback inside method
       //   }
       // } catch (clearErr) {
-      //   console.warn('Failed clearing user data (non-fatal):', clearErr);
+      //   console.log('Failed clearing user data (non-fatal):', clearErr);
       // }
 
       // call login endpoint
@@ -243,7 +243,7 @@ export function UserProvider({ children }) {
         await SecureStore.setItemAsync('userData', JSON.stringify(userDataForSync));
         console.log('SecureStore write OK');
       } catch (storeErr) {
-        //console.error("❌ Logout failed:", logoutError);('Failed to save token/userData to SecureStore:', storeErr);
+        //console.log("❌ Logout failed:", logoutError);('Failed to save token/userData to SecureStore:', storeErr);
         // decide whether to continue; here we continue to local DB sync
       }
 
@@ -253,7 +253,7 @@ export function UserProvider({ children }) {
         await UserService.syncUser(userDataForSync, data.token, db); // pass db explicitly
         console.log('UserService.syncUser completed');
       } catch (usrSyncErr) {
-        console.warn('UserService.syncUser failed (non-fatal):', usrSyncErr);
+        console.log('UserService.syncUser failed (non-fatal):', usrSyncErr);
         // continue to full sync attempt (or decide to abort)
       }
 
@@ -263,7 +263,7 @@ export function UserProvider({ children }) {
       // Fetch full sync data then save to sqlite (guard db)
       try {
         if (!db) {
-          console.warn('⚠️ Skipping full sync: db unavailable');
+          console.log('⚠️ Skipping full sync: db unavailable');
         } else {
           console.log('Fetching /user/sync-data from server...');
           const syncRes = await fetchWithTimeout(`${API_URL}/user/sync-data`, {
@@ -284,13 +284,13 @@ export function UserProvider({ children }) {
           console.log('✅ Full sync completed');
         }
       } catch (syncErr) {
-        console.warn('Sync failed:', syncErr);
+        console.log('Sync failed:', syncErr);
       }
 
       return { success: true, user: userDataForSync, isWebUser: false };
     } catch (error) {
       // don't swallow the real error — log then rethrow so caller/UI sees it
-      //console.error("❌ Logout failed:", logoutError);('Login flow error:', error);
+      //console.log("❌ Logout failed:", logoutError);('Login flow error:', error);
       // try best-effort cleanup
       try { await UserService.clearUserData(db); } catch (_) {}
       throw error;
@@ -333,12 +333,12 @@ export function UserProvider({ children }) {
           console.log('Restoring from SecureStore backup:', parsed);
           setUser(parsed);
           UserService.syncUser(parsed, token).catch(e => 
-            console.warn('Background sync failed:', e)
+            console.log('Background sync failed:', e)
           );
         }
       }
     } catch (error) {
-      //console.error("❌ Logout failed:", logoutError);('Session load error:', error);
+      //console.log("❌ Logout failed:", logoutError);('Session load error:', error);
       setUser(null);
     } finally {
       setLoading(false);
@@ -365,17 +365,17 @@ export function UserProvider({ children }) {
       const isReachable = await testServerConnection(API_URL);
       console.log("API URL in logout:", API_URL);
       if (!isReachable) {
-        console.warn('❌ Server not reachable — aborting logout');
+        console.log('❌ Server not reachable — aborting logout');
         return false;
       }
     } catch (err) {
-      //console.error("❌ Logout failed:", logoutError);('❌ Error checking server reachability:', err);
+      //console.log("❌ Logout failed:", logoutError);('❌ Error checking server reachability:', err);
       return false;
     }
 
     // 1. Wait if DB is still initializing
     if (!dbInitialized) {
-      console.warn('⏳ Waiting for DB to finish initializing before logout...');
+      console.log('⏳ Waiting for DB to finish initializing before logout...');
       await new Promise(resolve => setTimeout(resolve, 300));
     }
 
@@ -399,7 +399,7 @@ export function UserProvider({ children }) {
             console.log(`📊 Local pupil_points before sync: ${localPupilPoints}`);
           }
         } catch (pointsErr) {
-          console.warn('⚠️ Could not fetch local pupil_points:', pointsErr);
+          console.log('⚠️ Could not fetch local pupil_points:', pointsErr);
         }
       }
 
@@ -410,7 +410,7 @@ export function UserProvider({ children }) {
           await triggerSyncIfOnline(db, getCurrentFlags(), 1);
           console.log("✅ Offline sync completed");
         } catch (syncErr) {
-          console.warn("⚠️ Sync before logout failed (non-fatal):", syncErr);
+          console.log("⚠️ Sync before logout failed (non-fatal):", syncErr);
         }
       }
 
@@ -436,10 +436,10 @@ export function UserProvider({ children }) {
             console.log("✅ Pupil points synced to server");
           } else {
             const errorData = await syncResponse.json();
-            console.warn(`⚠️ Points sync failed: ${errorData.error || 'Unknown error'}`);
+            console.log(`⚠️ Points sync failed: ${errorData.error || 'Unknown error'}`);
           }
         } catch (pointsSyncErr) {
-          console.warn("⚠️ Points sync error (non-fatal):", pointsSyncErr);
+          console.log("⚠️ Points sync error (non-fatal):", pointsSyncErr);
         }
       }
 
@@ -481,7 +481,7 @@ export function UserProvider({ children }) {
         }
         console.log("✅ Local DB cleared");
       } else {
-        console.warn("⚠️ DB not ready — skipped clear");
+        console.log("⚠️ DB not ready — skipped clear");
       }
 
       // 4. Clear React state
@@ -491,7 +491,7 @@ export function UserProvider({ children }) {
       return true;
 
     } catch (logoutError) {
-      //console.error("❌ Logout failed:", logoutError);("❌ Logout failed:", logoutError);
+      //console.log("❌ Logout failed:", logoutError);("❌ Logout failed:", logoutError);
       return false;
     }
   };
@@ -512,7 +512,7 @@ export function UserProvider({ children }) {
               await logout(); // Auto-logout if token is invalid
           }
       } catch (error) {
-          console.warn('Background verification failed:', error);
+          console.log('Background verification failed:', error);
           await logout(); // Auto-logout on error
       }
   };
@@ -583,7 +583,7 @@ export function UserProvider({ children }) {
     const contentType = response.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
       const text = await response.text();
-      //console.error("❌ Logout failed:", logoutError);('Non-JSON response:', { status: response.status, url, text });
+      //console.log("❌ Logout failed:", logoutError);('Non-JSON response:', { status: response.status, url, text });
       throw new Error(`Expected JSON, received ${contentType || 'no content-type'}: ${text.slice(0, 100)}...`);
     }
 
@@ -618,12 +618,12 @@ export function UserProvider({ children }) {
         return data;
       } else {
         const text = await response.text();
-        console.warn('⚠️ Unexpected response:', text);
+        console.log('⚠️ Unexpected response:', text);
         throw new Error('Server did not return JSON');
       }
 
     } catch (error) {
-      //console.error("❌ Logout failed:", logoutError);('❌ Vulnerable test error:', error.message);
+      //console.log("❌ Logout failed:", logoutError);('❌ Vulnerable test error:', error.message);
       return { error: error.message };
     }
   };
@@ -641,7 +641,7 @@ export function UserProvider({ children }) {
       console.log('Secure Function Response:', data);
       return data;
     } catch (error) {
-      //console.error("❌ Logout failed:", logoutError);('❌ Secure test error:', error.message);
+      //console.log("❌ Logout failed:", logoutError);('❌ Secure test error:', error.message);
       return { error: error.message };
     }
   };

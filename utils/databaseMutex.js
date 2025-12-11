@@ -47,7 +47,7 @@ class DatabaseMutex {
         acquiredAt: Date.now(),
       });
     } catch (err) {
-      console.error(`❌ Mutex timeout acquiring ${resource}:`, err.message);
+      console.log(`❌ Mutex timeout acquiring ${resource}:`, err.message);
       throw err;
     }
   }

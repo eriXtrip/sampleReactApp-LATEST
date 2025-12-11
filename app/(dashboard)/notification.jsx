@@ -39,7 +39,7 @@ const Notification = () => {
         //console.log("📩 Notifications from DB:", result);
         setNotifications(result);
       } catch (error) {
-        console.error("❌ Error fetching notifications:", error);
+        console.log("❌ Error fetching notifications:", error);
       }
     };
 

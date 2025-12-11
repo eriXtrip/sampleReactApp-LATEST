@@ -7,7 +7,7 @@ import { safeExec, safeGetAll, safeRun, safeGetFirst } from './dbHelpers';
 export const handleDelete = async (file, type, setFileExists, lesson_bellonId, db) => {
   try {
     if (!file) {
-      console.error("File is undefined");
+      console.log("File is undefined");
       return false;
     }
     const localPath = resolveLocalPath(file);
@@ -34,7 +34,7 @@ export const handleDelete = async (file, type, setFileExists, lesson_bellonId, d
           console.log(`Successfully deleted associated image file: ${imagePath}`);
         }
       } catch (err) {
-        console.error("Error reading or parsing JSON for image deletion:", err);
+        console.log("Error reading or parsing JSON for image deletion:", err);
       }
     }
 
@@ -50,7 +50,7 @@ export const handleDelete = async (file, type, setFileExists, lesson_bellonId, d
         );
         console.log(`✅ Deccremented no_of_contents for lesson_id=${lesson_bellonId}`);
       } catch (err) {
-        console.warn('Failed to update lesson no_of_contents:', err);
+        console.log('Failed to update lesson no_of_contents:', err);
       }
     }
 
@@ -66,7 +66,7 @@ export const handleDelete = async (file, type, setFileExists, lesson_bellonId, d
         );
         console.log("Success updating subject_contents.");
       } catch (err){
-        console.warn('Failed to update subject_contents:', err);
+        console.log('Failed to update subject_contents:', err);
       }
     }
 
@@ -76,7 +76,7 @@ export const handleDelete = async (file, type, setFileExists, lesson_bellonId, d
     setFileExists(false);
     return true;
   } catch (err) {
-    console.error("Delete error:", err);
+    console.log("Delete error:", err);
     return false;
   }
 };

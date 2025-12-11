@@ -28,7 +28,7 @@ export const getApiUrl = async () => {
 
     return null;
   } catch (error) {
-    console.error('[apiManager] Error reading API:', error);
+    console.log('[apiManager] Error reading API:', error);
     return null;
   }
 };
@@ -47,14 +47,14 @@ export const setApiUrl = async (url) => {
       console.log('[apiManager] Saving API:', url);
       await AsyncStorage.setItem('API_URL', url);
     } else {
-      console.warn('[apiManager] API_KEY is set → ignoring setApiUrl()');
+      console.log('[apiManager] API_KEY is set → ignoring setApiUrl()');
     }
 
     inMemoryApiUrl = url;
     return true;
 
   } catch (error) {
-    console.error('[apiManager] Error saving URL:', error);
+    console.log('[apiManager] Error saving URL:', error);
     throw error;
   }
 };
@@ -65,7 +65,7 @@ export const clearApiUrl = async () => {
     inMemoryApiUrl = null; // 🧠 Clear cache
     console.log('[apiManager] URL cleared successfully');
   } catch (error) {
-    console.error('[apiManager] Error clearing URL:', error);
+    console.log('[apiManager] Error clearing URL:', error);
     throw error;
   }
 };

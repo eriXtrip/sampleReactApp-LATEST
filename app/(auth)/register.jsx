@@ -317,7 +317,7 @@ const Register = () => {
             }
         } catch (error) {
             showAlert('Verification failed. Please try again.');
-            console.error('Verification Error:', error);
+            console.log('Verification Error:', error);
         } finally {
             setLoading(false);
         }
@@ -373,7 +373,7 @@ const Register = () => {
                 showAlert(result.error || 'Registration failed');
             }
         } catch (error) {
-            console.error('Registration error:', error);
+            console.log('Registration error:', error);
             showAlert(error.message || 'Registration failed. Please try again.');
         } finally {
             setLoading(false);

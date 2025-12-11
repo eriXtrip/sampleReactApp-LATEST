@@ -77,7 +77,7 @@ export default function FlashCardScreen() {
         setFlashcards([]);
       }
     } catch (err) {
-      console.error("Failed to load flashcard JSON:", err);
+      console.log("Failed to load flashcard JSON:", err);
       Alert.alert("Error", "Unable to load flashcard file.");
       setFlashcards([]);
     } finally {
@@ -252,7 +252,7 @@ export default function FlashCardScreen() {
             try {
               await saveAchievementAndUpdateContent(db, gameBadge, content_id);
             } catch (error) {
-              console.error("Failed to save achievement:", error);
+              console.log("Failed to save achievement:", error);
             }
           }
           setShowBadge(false);

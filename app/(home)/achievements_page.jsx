@@ -44,7 +44,7 @@ const AchievementsPage = () => {
 
         setAchievements(result);
       } catch (error) {
-        console.error('Failed to load achievements:', error);
+        console.log('Failed to load achievements:', error);
       }
     };
 

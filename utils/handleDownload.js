@@ -142,7 +142,7 @@ export const handleDownload = async (file, title, content, type, setFileExists, 
         );
         console.log(`✅ Incremented no_of_contents for lesson_id=${lesson_bellonId}`);
       } catch (err) {
-        console.warn('Failed to update lesson no_of_contents:', err);
+        console.log('Failed to update lesson no_of_contents:', err);
       }
     }
 
@@ -159,7 +159,7 @@ export const handleDownload = async (file, title, content, type, setFileExists, 
         );
         console.log("Success updating subject_contents.");
       } catch (err){
-        console.warn('Failed to update subject_contents:', err);
+        console.log('Failed to update subject_contents:', err);
       }
     }
 

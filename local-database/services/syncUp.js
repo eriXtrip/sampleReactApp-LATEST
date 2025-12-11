@@ -53,7 +53,7 @@ async function runSyncQueue(db) {
           
         } catch (err) {
           retryCount++;
-          console.error(`❌ Sync task failed: ${task.name} (attempt ${retryCount})`, err);
+          console.log(`❌ Sync task failed: ${task.name} (attempt ${retryCount})`, err);
 
           if (retryCount <= MAX_RETRIES) {
             const backoff = 2000 * retryCount; // 2s, 4s, 6s
@@ -172,12 +172,12 @@ export async function syncTestScoresToServer(db) {
       console.log(`✅ Synced: ${unsyncedScores.length} scores, ${unsyncedAnswers.length} answers`);
       return true;
     } catch (err) {
-      console.error('❌ Pupil Answer Sync error (rolled back):', err);
+      console.log('❌ Pupil Answer Sync error (rolled back):', err);
       return false;
     }
 
   } catch (err) {
-    console.error('❌ Pupil Answer Sync error:', err);
+    console.log('❌ Pupil Answer Sync error:', err);
     return false;
   }
 }
@@ -301,7 +301,7 @@ export async function syncNotifications(db) {
     console.log(`✅ Synced ${localChanges.length} notification(s)`);
     return true;
   } catch (err) {
-    console.error('❌ Notifications sync error:', err);
+    console.log('❌ Notifications sync error:', err);
     return false;
   }
 }
@@ -397,11 +397,11 @@ export async function syncProgressToServer(db) {
       console.log(`✅ Successfully synced ${unsyncedLessonProgress.length} lessons and ${unsyncedContentProgress.length} content progress rows`);
       return true;
     } catch (err) {
-      console.error('❌ Progress sync error (rolled back):', err);
+      console.log('❌ Progress sync error (rolled back):', err);
       return false;
     }
   } catch (err) {
-    console.error('❌ Progress sync error:', err);
+    console.log('❌ Progress sync error:', err);
     return false;
   }
 
@@ -481,7 +481,7 @@ export async function syncAchievements(db) {
     return true;
 
   } catch (err) {
-    console.error('❌ Achievements sync error:', err);
+    console.log('❌ Achievements sync error:', err);
     return false;
   }
 }
@@ -529,7 +529,7 @@ export async function triggerSyncIfOnline(db, flags = {}, isLogout = false) {
     });
     
   } catch (error) {
-    console.error("❌ Error during user/auth check:", error);
+    console.log("❌ Error during user/auth check:", error);
     return;
   }
 
@@ -539,7 +539,7 @@ export async function triggerSyncIfOnline(db, flags = {}, isLogout = false) {
   try {
     await dbMutex.acquire('sync', SYNC_TIMEOUT);
   } catch (err) {
-    console.error("❌ Failed to acquire sync lock:", err.message);
+    console.log("❌ Failed to acquire sync lock:", err.message);
     return;
   }
 
@@ -581,7 +581,7 @@ export async function triggerSyncIfOnline(db, flags = {}, isLogout = false) {
     }
 
   } catch (err) {
-    console.error("❌ Sync operation failed:", err);
+    console.log("❌ Sync operation failed:", err);
     // Clean up on timeout
     if (err.message === 'Sync operation timeout') {
       dbMutex.forceRelease('sync');

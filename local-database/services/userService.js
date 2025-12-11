@@ -14,7 +14,7 @@ export default class UserService {
     const activeDb = dbInstance || this.db;
 
     if (!activeDb) {
-      console.warn('❌ syncUser: Database not initialized');
+      console.log('❌ syncUser: Database not initialized');
       return;
     }
 
@@ -105,7 +105,7 @@ export default class UserService {
       }
       console.log('✅ User synced successfully');
     } catch (error) {
-      console.error('❌ User sync failed', error);
+      console.log('❌ User sync failed', error);
       throw error;
     }
   }
@@ -114,7 +114,7 @@ export default class UserService {
   static async getCurrentUser(dbInstance = null) {
     const activeDb = dbInstance || this.db;
     if (!activeDb) {
-      console.warn('❌ getCurrentUser: Database not initialized');
+      console.log('❌ getCurrentUser: Database not initialized');
       return null;
     }
 
@@ -131,7 +131,7 @@ export default class UserService {
 
       return await safeGetAll(activeDb, 'SELECT * FROM users LIMIT 1');
     } catch (error) {
-      console.error('❌ Failed to get user:', error);
+      console.log('❌ Failed to get user:', error);
       return null;
     }
   }
@@ -172,7 +172,7 @@ export default class UserService {
   static async clearAllUserData(dbInstance = null) {
     const activeDb = dbInstance || this.db;
     if (!activeDb) {
-      console.warn('❌ clearAllUserData: DB not ready for full clear');
+      console.log('❌ clearAllUserData: DB not ready for full clear');
       return;
     }
 
@@ -194,12 +194,12 @@ export default class UserService {
       try {
         await safeExecMany(activeDb, statements);
       } catch (e) {
-        console.warn(`❌ clearAllUserData failed`, e.message);
+        console.log(`❌ clearAllUserData failed`, e.message);
       }
 
       console.log('🧹 All user-related data cleared');
     } catch (err) {
-      console.warn('⚠️ Full clear failed (non-fatal):', err.message);
+      console.log('⚠️ Full clear failed (non-fatal):', err.message);
     }
   }
 
@@ -207,7 +207,7 @@ export default class UserService {
   static async display_sqliteDatabase(dbInstance = null) {
     const activeDb = dbInstance || this.db;
     if (!activeDb) {
-      console.warn('❌ display_sqliteDatabase: Database not initialized');
+      console.log('❌ display_sqliteDatabase: Database not initialized');
       return;
     }
 
@@ -226,7 +226,7 @@ export default class UserService {
       // 'subject_contents',
       // 'games',
       // 'game_types',
-       'notifications'
+      // 'notifications'
       // 'pupil_test_scores',
       // 'pupil_achievements',
       // 'classmates'
@@ -255,7 +255,7 @@ export default class UserService {
           });
         }
       } catch (error) {
-        console.warn(`⚠️ Error reading table '${table}':`, error.message);
+        console.log(`⚠️ Error reading table '${table}':`, error.message);
       }
     }
 

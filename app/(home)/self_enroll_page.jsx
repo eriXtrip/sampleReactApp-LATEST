@@ -49,7 +49,7 @@ async function safeOfflineSync(db, syncData) {
 
     console.log("✅ Sync + Save completed");
   } catch (err) {
-    console.error("❌ Sync/Save error:", err);
+    console.log("❌ Sync/Save error:", err);
   }
 }
 
@@ -200,7 +200,7 @@ const SelfEnrollPage = () => {
       }
 
     } catch (error) {
-      console.error('Enrollment failed:', error);
+      console.log('Enrollment failed:', error);
       //Alert.alert('Failed', error.message || 'Please try again');
       showWarringToast('Failed', 'Please try again');
 

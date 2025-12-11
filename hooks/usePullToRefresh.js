@@ -31,7 +31,7 @@ export default function usePullToRefresh(db, onSyncComplete) {
       }
       
     } catch (error) {
-      console.error('❌ Pull-to-refresh sync failed:', error);
+      console.log('❌ Pull-to-refresh sync failed:', error);
     } finally {
       setRefreshing(false);
     }

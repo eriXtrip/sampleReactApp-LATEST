@@ -100,7 +100,7 @@ const ensureLessonsDir = async () => {
       await FileSystem.makeDirectoryAsync(LESSONS_DIR, { intermediates: true });
     }
   } catch (e) {
-    console.error('Error creating lessons folder:', e);
+    console.log('Error creating lessons folder:', e);
   }
 };
 

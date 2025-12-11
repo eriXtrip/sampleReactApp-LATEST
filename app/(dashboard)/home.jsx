@@ -54,7 +54,7 @@ const Home = () => {
         );
         setAchievements(result);
       } catch (error) {
-        console.error('Error fetching achievements:', error);
+        console.log('Error fetching achievements:', error);
       }
     };
 
@@ -113,7 +113,7 @@ const Home = () => {
 
         setSubjectsProgress(result);
       } catch (error) {
-        console.error('Failed to load subjects:', error);
+        console.log('Failed to load subjects:', error);
         setSubjectsProgress([]);
       }
     };
@@ -197,7 +197,7 @@ const Home = () => {
 
         setRecentActivities(formatted);
       } catch (err) {
-        console.error('Recent activity error:', err);
+        console.log('Recent activity error:', err);
         setRecentActivities([]);
       }
     };

@@ -47,7 +47,7 @@ export default function FlashCardScreen() {
         setFlashData(parsed.items || []);
         if (parsed.badge) setGameBadge(parsed.badge);
       } catch (err) {
-        console.error(err);
+        console.log(err);
       }
     };
     load();

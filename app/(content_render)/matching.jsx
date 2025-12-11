@@ -72,7 +72,7 @@ export default function MatchingScreen() {
         }, 1000);
 
       } catch (err) {
-        console.error("Failed to load matching JSON:", err);
+        console.log("Failed to load matching JSON:", err);
         Alert.alert("Error", "Unable to load matching file.");
       }
     };

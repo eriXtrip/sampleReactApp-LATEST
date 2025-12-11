@@ -13,7 +13,7 @@ export async function enableWAL(db) {
     await db.execAsync("PRAGMA cache_size = -20000;");
     console.log("🟢 SQLite WAL mode enabled");
   } catch (err) {
-    console.warn("⚠️ WAL enable failed:", err.message);
+    console.log("⚠️ WAL enable failed:", err.message);
   }
 }
 
@@ -25,7 +25,7 @@ export async function safeRun(db, sql, params = [], timeout = 30000) {
   try {
     return await db.runAsync(sql, params);
   } catch (err) {
-    console.error("❌ safeRun SQL ERROR:", err);
+    console.log("❌ safeRun SQL ERROR:", err);
     throw err;
   } finally {
     try { dbMutex.release("db"); } catch {}
@@ -40,7 +40,7 @@ export async function safeGetAll(db, sql, params = [], timeout = 30000) {
   try {
     return await db.getAllAsync(sql, params);
   } catch (err) {
-    console.error("❌ safeGetAll ERROR:", err);
+    console.log("❌ safeGetAll ERROR:", err);
     throw err;
   } finally {
     try { dbMutex.release("db"); } catch {}
@@ -55,7 +55,7 @@ export async function safeGetFirst(db, sql, params = [], timeout = 30000) {
   try {
     return await db.getFirstAsync(sql, params);
   } catch (err) {
-    console.error("❌ safeGetFirst ERROR:", err);
+    console.log("❌ safeGetFirst ERROR:", err);
     throw err;
   } finally {
     try { dbMutex.release("db"); } catch {}
@@ -78,9 +78,9 @@ export async function safeExec(db, sql, timeout = 30000) {
     return result;
 
   } catch (err) {
-    console.error("❌ safeExec ERROR → ROLLBACK", err);
+    console.log("❌ safeExec ERROR → ROLLBACK", err);
     try { await db.execAsync("ROLLBACK;"); } catch (e2) {
-      console.error("❌ Rollback failed:", e2);
+      console.log("❌ Rollback failed:", e2);
     }
     throw err;
 
@@ -105,7 +105,7 @@ export async function safeExecMany(db, statements = [], timeout = 30000) {
 
     await db.execAsync("COMMIT;");
   } catch (err) {
-    console.error("❌ safeExecMany ERROR → ROLLBACK", err);
+    console.log("❌ safeExecMany ERROR → ROLLBACK", err);
     try { await db.execAsync("ROLLBACK;"); } catch {}
     throw err;
   } finally {

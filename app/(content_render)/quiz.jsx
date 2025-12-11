@@ -80,7 +80,7 @@ export default function QuizScreen() {
       console.log("Current user ID:", result?.user_id);
       return result?.user_id || null;
     } catch (err) {
-      console.error("❌ Error fetching current user:", err);
+      console.log("❌ Error fetching current user:", err);
       return null;
     }
   };
@@ -98,7 +98,7 @@ export default function QuizScreen() {
       );
       console.log("✅ Quiz score saved:", finalScore, "/", maxScore);
     } catch (err) {
-      console.error("❌ Error saving score:", err);
+      console.log("❌ Error saving score:", err);
     }
   };
 
@@ -162,7 +162,7 @@ export default function QuizScreen() {
 
       console.log("✅ Answers saved correctly with proper choice_id mapping");
     } catch (err) {
-      console.error("❌ Error saving answers:", err);
+      console.log("❌ Error saving answers:", err);
     }
   };
 
@@ -229,7 +229,7 @@ export default function QuizScreen() {
         }
 
       } catch (err) {
-        console.error("Failed to load quiz JSON:", err);
+        console.log("Failed to load quiz JSON:", err);
         setAlertMessage("Unable to load quiz file.");
         setAlertVisible(true);
       }

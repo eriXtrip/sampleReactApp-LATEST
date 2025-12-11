@@ -21,7 +21,7 @@ const InAppBrowserScreen = () => {
       console.log('Decoded URL:', decodedUrl);
       return new URL(decodedUrl).toString();
     } catch (error) {
-      console.error('URL parsing error:', error);
+      console.log('URL parsing error:', error);
       // Try to use as-is if URL parsing fails
       return String(url);
     }
@@ -55,7 +55,7 @@ const InAppBrowserScreen = () => {
         onLoadStart={() => setLoading(true)}
         onError={(syntheticEvent) => {
           const { nativeEvent } = syntheticEvent;
-          console.error('WebView error:', nativeEvent);
+          console.log('WebView error:', nativeEvent);
           setLoading(false);
         }}
         startInLoadingState={true}

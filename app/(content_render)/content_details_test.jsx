@@ -50,7 +50,7 @@ const ensureLessonsDir = async () => {
     }
     return LESSONS_DIR;
   } catch (e) {
-    console.error('❌ Error creating lessons folder:', e);
+    console.log('❌ Error creating lessons folder:', e);
     Alert.alert('Error', 'Failed to create lessons folder. Cannot save files.');
     return null;
   }
@@ -71,7 +71,7 @@ export default function ContentDetails() {
         setFileExists(fileInfo.exists);
         console.log('📄 File exists:', fileInfo.exists, 'Path:', targetUri);
       } catch (err) {
-        console.error('Error checking file existence:', err);
+        console.log('Error checking file existence:', err);
         setFileExists(false);
       }
     })();
@@ -99,7 +99,7 @@ export default function ContentDetails() {
         }
       }
     } catch (err) {
-      console.error('Open file error:', err);
+      console.log('Open file error:', err);
       Alert.alert('Error', 'No app found to open this file. Please install a compatible app (e.g., a PDF viewer).');
     }
   };
@@ -149,7 +149,7 @@ export default function ContentDetails() {
       await openWithChooser(targetUri);
     } catch (err) {
       setDownloading(false);
-      console.error('Download error:', err);
+      console.log('Download error:', err);
       Alert.alert('Error', err.message);
     }
   };
