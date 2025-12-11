@@ -452,7 +452,7 @@ const SubjectPage = () => {
                   Quarter: item.Quarter,
                 },
               });
-            }, 500);
+            }, 700);
           }
         }}
         onLongPress={() => {

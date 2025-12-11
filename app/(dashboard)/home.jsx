@@ -247,7 +247,7 @@ const Home = () => {
           <TouchableOpacity
             onPress={() => {
               const goToSearch = async () => {
-                await wait(500); // adjust delay if needed
+                await wait(700); // adjust delay if needed
                 router.push('/searchpage');
               };
               goToSearch();

@@ -57,9 +57,8 @@ async function safeOfflineSync(db, syncData) {
 
 const SelfEnrollPage = () => {
   const colorScheme = useColorScheme();
-  const { themeColors } = useContext(ProfileContext);
+  const { themeColors, user } = useContext(ProfileContext);
   const theme = Colors[themeColors === 'system' ? (colorScheme === 'dark' ? 'dark' : 'light') : themeColors];
-  const { user } = useContext(UserContext);
   const { 
     enrollInSubject,
     checkSectionRequiresKey,
@@ -113,7 +112,7 @@ const SelfEnrollPage = () => {
   );
 
   const navigateToSubjectPage = async () => {
-    await wait(500);
+    await wait(700);
     router.push({
       pathname: '/subjectlist',
       params: {
@@ -125,7 +124,7 @@ const SelfEnrollPage = () => {
   };
 
   const navigateToSectionPage = async () => {
-    await wait(500);
+    await wait(700);
     router.push({
       pathname: '/subjectlist', // or '/classroom', '/section_home', etc.
       params: {

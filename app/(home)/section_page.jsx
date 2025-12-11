@@ -117,12 +117,14 @@ const SectionPage = () => {
 
   const renderSubjectItem = ({ item }) => (
     <TouchableOpacity
-      onPress={() =>
-        navigation.navigate('subject_page', {
-          subject_id: item.id,   // ✅ pass subject_id
-          name: item.title, 
-          grade: item.grade
-        })
+      onPress={() => 
+        setTimeout(() => {
+          navigation.navigate('subject_page', {
+            subject_id: item.id,   // ✅ pass subject_id
+            name: item.title, 
+            grade: item.grade
+          })
+        }, 700)
       }
     >
       <View style={[styles.subjectBox, { backgroundColor: theme.background, borderColor: theme.cardBorder }]}>

@@ -333,7 +333,7 @@ const ContentDetails = () => {
               practice,  
             },
           });
-        }, 500);
+        }, 700);
         console.log(`Loaded ${content_type} at ${actualUri}`);
       } catch (err) {
         console.log(`${content_type} load error:`, err);

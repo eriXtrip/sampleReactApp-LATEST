@@ -123,7 +123,7 @@ const LessonPage = () => {
           if (locked) return;
 
           // Wait for 500ms before navigating
-          await wait(500);
+          await wait(700);
 
           router.push({
             pathname: "/content_details",

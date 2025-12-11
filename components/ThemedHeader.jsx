@@ -32,7 +32,7 @@ const ThemedHeader = ({ options, navigation }) => {
           onPress={() => {
             setTimeout(() => {
               navigation.goBack();
-            }, 500); // 500ms delay
+            }, 700); // 500ms delay
           }}
         >
           <Ionicons name="chevron-back" size={30} color={theme.title} />

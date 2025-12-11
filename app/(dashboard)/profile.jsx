@@ -71,7 +71,7 @@ const Profile = () => {
         // Navigate after a tiny delay to avoid insertionEffect warning
         setTimeout(() => {
           router.replace('/login');
-        }, 0);
+        }, 700);
       } else {
         showThemedAlert('Server not reachable. Please try again.');
       }
@@ -145,7 +145,7 @@ const Profile = () => {
           <ThemedText style={styles.cardTitle}>PROFILE MENU</ThemedText>
          
           <TouchableOpacity style={[styles.cardItem]}
-            onPress={() => router.push('/profile_page')}
+            onPress={() => setTimeout(() => { router.push('/profile_page')}, 700)}
           >
             <ThemedText>My Profile</ThemedText>
             <Ionicons name="chevron-forward-outline" size={20} color="#999" />
@@ -153,7 +153,7 @@ const Profile = () => {
 
           <TouchableOpacity 
             style={[styles.cardItem, { borderBottomWidth: 0 }]}
-            onPress={() => router.push('/change-password')}
+            onPress={() => setTimeout(() => { router.push('/change-password')}, 700)}
           >
             <ThemedText>Change Password</ThemedText>
             <Ionicons name="chevron-forward-outline" size={20} color="#999" />
@@ -167,7 +167,7 @@ const Profile = () => {
           <ThemedText style={styles.cardTitle}>Download Queue</ThemedText>
           <TouchableOpacity
             style={[styles.cardItem, { borderBottomWidth: 0 }]}
-            onPress={() => router.push('/download')}
+            onPress={() => setTimeout(() => { router.push('/download')}, 700)}
           >
             <ThemedText>Download</ThemedText>
             <Ionicons name="chevron-forward-outline" size={20} color="#999" />
@@ -180,14 +180,14 @@ const Profile = () => {
         <View style={[styles.card , { backgroundColor: theme.navBackground, borderColor: theme.cardBorder, borderWidth: 1,}]}>
           <ThemedText style={styles.cardTitle}>ABOUT MQUEST</ThemedText>
           <TouchableOpacity style={styles.cardItem}
-            onPress={() => router.push('/privacy')}
+            onPress={() => setTimeout(() => { router.push('/privacy')} , 700)}
           >
             <ThemedText>Privacy Policy</ThemedText>
             <Ionicons name="chevron-forward-outline" size={20} color="#999" />
           </TouchableOpacity>
 
           <TouchableOpacity style={[styles.cardItem, { borderBottomWidth: 0 }]}
-            onPress={() => router.push('/terms')}
+            onPress={() => setTimeout(() => { router.push('/terms')}, 700)}
             >
             <ThemedText>Terms and Conditions</ThemedText>
             <Ionicons name="chevron-forward-outline" size={20} color="#999" />

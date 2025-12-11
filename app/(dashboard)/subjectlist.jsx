@@ -116,7 +116,7 @@ const SubjectList = () => {
                   grade: item.grade
                 },
               });
-            }, 500) // 500ms delay
+            }, 700) // 500ms delay
           }
         >
           <View style={[styles.subjectBox, { backgroundColor: theme.background, borderColor: theme.cardBorder }]}>
@@ -152,7 +152,7 @@ const SubjectList = () => {
                   schoolYear: item.school_year
                 },
               });
-            }, 500)
+            }, 700)
           }
           style={[styles.sectionContainer, { backgroundColor: theme.background, borderColor: theme.cardBorder }]}
         >
@@ -163,7 +163,7 @@ const SubjectList = () => {
           </View>
           {/* Chevron icon with rotation */}
           <TouchableOpacity 
-            onPress={() => toggleSection(item.id)}
+            onPress={() => {setTimeout(() => toggleSection(item.id), 500); }}
             style={styles.chevronButton}
             hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}
           >

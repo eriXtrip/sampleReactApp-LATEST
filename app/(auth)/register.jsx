@@ -430,7 +430,7 @@ const Register = () => {
                         <View style={{ alignItems: 'flex-start' }}>
                             <Pressable
                                 onPress={async () => {
-                                    await new Promise(res => setTimeout(res, 500));
+                                    await new Promise(res => setTimeout(res, 700));
                                     router.replace('/login');
                                 }}
                             >

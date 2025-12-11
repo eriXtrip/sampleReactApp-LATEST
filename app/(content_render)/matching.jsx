@@ -173,7 +173,7 @@ export default function MatchingScreen() {
             handleNextBatchAnimation();
           } else {
             clearInterval(timerRef.current);
-            setTimeout(() => setShowBadge(true), 500);
+            setTimeout(() => setShowBadge(true), 700);
           }
         }
       } else {
