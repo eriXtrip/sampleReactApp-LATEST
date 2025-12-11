@@ -270,6 +270,7 @@ const Register = () => {
 
             if (result.success) {
                 setVerifyCode(false);
+                setLoading(false);
                 setStep(6); // Move to verification step
                 console.log('DEBUG - Registration Started:', {
                     email: formData.email,
@@ -284,9 +285,13 @@ const Register = () => {
                     teacherId: formData.teacherId,
                 });
             } else {
-                showAlert(result.error || 'Registration failed');
+                setLoading(false);
+                setVerifyCode(false);
+                showAlert(result.error || 'Registration failed'); 
             }
         } catch (error) {
+            setLoading(false);
+            setVerifyCode(false);
             showAlert('Network error. Please try again.');
         } finally {
             setLoading(false);
@@ -424,12 +429,9 @@ const Register = () => {
                     <>
                         <View style={{ alignItems: 'flex-start' }}>
                             <Pressable
-                                onPress={() => {
-                                const goBack = async () => {
-                                    await wait(1500); // or however long you need
-                                    router.push('/login');
-                                };
-                                goBack();
+                                onPress={async () => {
+                                    await new Promise(res => setTimeout(res, 500));
+                                    router.replace('/login');
                                 }}
                             >
                                 <Ionicons name="arrow-back" size={24} color={theme.text} />

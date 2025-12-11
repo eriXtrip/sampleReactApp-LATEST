@@ -190,7 +190,7 @@ export async function syncNotifications(db) {
   try {
     const API_URL = await getApiUrl();
     const token = await SecureStore.getItemAsync('authToken');
-    const user = await safeRun(
+    const user = await safeGetFirst(
       db,
       `SELECT server_id FROM users WHERE server_id IS NOT NULL LIMIT 1
     `);
@@ -487,7 +487,7 @@ export async function syncAchievements(db) {
 }
 
 
-export async function triggerSyncIfOnline(db, flags = {}) {
+export async function triggerSyncIfOnline(db, flags = {}, isLogout = false) {
   if (!db) return;
   if (!isDbInitialized) return;
 
@@ -560,21 +560,25 @@ export async function triggerSyncIfOnline(db, flags = {}) {
 
     await Promise.race([syncPromise, timeoutPromise]);
 
-    // 🔄 Refresh data from server - KEEP THIS INSIDE MUTEX
-    const API_URL = await getApiUrl();
-    const token = await SecureStore.getItemAsync('authToken');
+    // 🔄 Refresh data from server - only if NOT logout
+    if (!isLogout) {
+      const API_URL = await getApiUrl();
+      const token = await SecureStore.getItemAsync('authToken');
 
-    const response = await fetch(`${API_URL}/user/sync-data`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
+      const response = await fetch(`${API_URL}/user/sync-data`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
 
-    if (!response.ok) throw new Error('Failed to refresh data');
+      if (!response.ok) throw new Error('Failed to refresh data');
 
-    const freshSyncData = await response.json();
+      const freshSyncData = await response.json();
 
-    console.log("💾 Saving fresh server data to local SQLite...");
-    await saveSyncDataToSQLite(freshSyncData, db);
-    console.log("✅ Complete sync cycle finished");
+      console.log("💾 Saving fresh server data to local SQLite...");
+      await saveSyncDataToSQLite(freshSyncData, db);
+      console.log("✅ Complete sync cycle finished");
+    } else {
+      console.log("ℹ️ Logout triggered → skipping server refresh");
+    }
 
   } catch (err) {
     console.error("❌ Sync operation failed:", err);

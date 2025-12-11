@@ -39,11 +39,16 @@ const Profile = () => {
   const { refreshing, onRefresh } = usePullToRefresh(db);
 
   // Safely access user data with fallbacks
-  const displayName = user 
-    ? `${user.first_name || ''}${
-      user.middle_name ? ` ${user.middle_name.charAt(0).toUpperCase()}.` : ''
-      } ${user.last_name || ''}`.trim()
-    : "Loading...";
+  const displayName = user
+  ? [
+      user.first_name || "",
+      user.middle_name ? `${user.middle_name.charAt(0).toUpperCase()}.` : "",
+      user.last_name || "",
+      user.suffix || ""
+    ]
+      .filter(Boolean) // removes empty strings
+      .join(" ")
+  : "Loading...";
   const displayEmail = user?.email || "Loading...";
   const school = "Del Rosario Elementary School";
 

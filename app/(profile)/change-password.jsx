@@ -18,8 +18,8 @@ import { ProfileContext } from '../../contexts/ProfileContext';
 const ChangePassword = () => {
   const router = useRouter();
   const colorScheme = useColorScheme();
-  const { themeColors } = useContext(ProfileContext);
-  const { user, changepassword } = useContext(UserContext) || {}; // Fallback to empty object
+  const { themeColors, user } = useContext(ProfileContext);
+  const { changepassword } = useContext(UserContext) || {}; // Fallback to empty object
   const theme = Colors[themeColors === 'system' ? (colorScheme === 'dark' ? 'dark' : 'light') : themeColors];
 
   const [formData, setFormData] = useState({

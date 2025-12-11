@@ -35,6 +35,7 @@ const ProfilePage = () => {
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [suffix, setSuffix] = useState('');
   const [email, setEmail] = useState('');
   const [gradeLevel, setGradeLevel] = useState(''); // new
   const [section, setSection] = useState(''); // new
@@ -61,6 +62,7 @@ const ProfilePage = () => {
           setFirstName(latestUser.first_name || '');
           setMiddleName(latestUser.middle_name || '');
           setLastName(latestUser.last_name || '');
+          setSuffix(latestUser.suffix || '');
           setEmail(latestUser.email || '');
           setGradeLevel(latestUser.grade_level || '');
           setSection(latestUser.section || '');
@@ -93,6 +95,7 @@ const ProfilePage = () => {
       first_name: firstName.trim(),
       middle_name: middleName.trim(),
       last_name: lastName.trim(),
+      suffix: suffix.trim(),
       email: email.trim(),
       grade_level: gradeLevel.trim(),
       section: section.trim(),
@@ -118,9 +121,13 @@ const ProfilePage = () => {
     }
   };
 
-  const fullName = [firstName, middleName, lastName].filter(Boolean).join(' ');
+  const fullName = [firstName, middleName, lastName, suffix]
+  .map(n => n?.trim())
+  .filter(n => !!n)
+  .join(' ')
+  .trim();
   const initials = (firstName?.[0] || '') + (lastName?.[0] || '');
-  const displayName = fullName || user?.name || user?.username || 'Your Name';
+  const displayName = fullName.length ? fullName : (user?.name || user?.username || '...');
   const displayEmail = email || user?.email || '';
 
   const [editing, setEditing] = useState(false);

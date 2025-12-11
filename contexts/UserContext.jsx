@@ -178,9 +178,9 @@ export function UserProvider({ children }) {
         server_id: data.user.id,
         email: data.user.email,
         first_name: data.user.firstName,
-        middle_name: data.user.middleName || 'N/A',
+        middle_name: data.user.middleName,
         last_name: data.user.lastName,
-        suffix: data.user.suffix || 'N/A',
+        suffix: data.user.suffix,
         birth_date: data.user.birthday,
         gender: data.user.gender,
         role_id: data.user.role,
@@ -407,7 +407,7 @@ export function UserProvider({ children }) {
       if (db) {
         try {
           console.log("🔄 Triggering offline sync before logout...");
-          await triggerSyncIfOnline(db, getCurrentFlags());
+          await triggerSyncIfOnline(db, getCurrentFlags(), 1);
           console.log("✅ Offline sync completed");
         } catch (syncErr) {
           console.warn("⚠️ Sync before logout failed (non-fatal):", syncErr);

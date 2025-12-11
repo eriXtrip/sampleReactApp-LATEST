@@ -246,8 +246,8 @@ export async function saveSyncDataToSQLite(data, db) {
               type=excluded.type, 
               is_read=excluded.is_read, 
               created_at=excluded.created_at, 
-              read_at=excluded.read_at;
-              is_synced=excluded.is_synced;
+              read_at=excluded.read_at,
+              is_synced=excluded.is_synced
           `,
           [
             n.notification_id,
@@ -265,6 +265,18 @@ export async function saveSyncDataToSQLite(data, db) {
         if (!n.is_read) {
           console.log(`📱 Triggering local notification: ${n.title}`);
           await triggerLocalNotification(n.title, n.message || '');
+
+          // ✅ Mark notification as read after triggering the local notification
+          await safeRun(
+            db,
+            `UPDATE notifications 
+              SET is_read = 1, 
+                  read_at = ? 
+            WHERE server_notification_id = ?`,
+            [new Date().toISOString(), n.notification_id]
+          );
+
+          console.log(`📝 Marked as read: ${n.notification_id}`);
         }
       }
     }

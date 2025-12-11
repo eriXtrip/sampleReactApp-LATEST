@@ -218,7 +218,7 @@ export default class UserService {
 
     const tables = [
       // 'roles',
-       'users',
+      // 'users',
       // 'sections',
       // 'subjects',
       // 'subjects_in_section',
@@ -226,10 +226,10 @@ export default class UserService {
       // 'subject_contents',
       // 'games',
       // 'game_types',
-      //'notifications'
-      //'pupil_test_scores',
-      //'pupil_achievements',
-      //'classmates'
+       'notifications'
+      // 'pupil_test_scores',
+      // 'pupil_achievements',
+      // 'classmates'
     ];
 
     for (const table of tables) {
