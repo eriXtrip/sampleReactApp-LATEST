@@ -62,20 +62,20 @@ const ThemedActionBar = ({
         {/* Always show Download */}
         <TouchableOpacity
           style={styles.action}
-          onPress={onDownload}
+          onPress={() => setTimeout(() => onDownload(), 800)}
         >
           <Ionicons name="cloud-download-outline" size={28} color={theme.text} />
           <Text style={[styles.hintText, { color: theme.text }]}>Download</Text>
         </TouchableOpacity>
 
-        {/* Always show Delete */}
         <TouchableOpacity
           style={styles.action}
-          onPress={onDelete}
+          onPress={() => setTimeout(() => onDelete(), 800)}
         >
           <Ionicons name="trash-outline" size={28} color={theme.text} />
           <Text style={[styles.hintText, { color: theme.text }]}>Delete</Text>
         </TouchableOpacity>
+
       </View>
     </View>
   );

@@ -174,6 +174,8 @@ const ContentDetails = () => {
     const newState = !isDone;
     setIsDone(newState);
 
+    await new Promise(resolve => setTimeout(resolve, 800));
+
     try {
       const now = new Date().toISOString();
 
@@ -224,6 +226,8 @@ const ContentDetails = () => {
     if (!contents.length) return;
 
     const item = contents[0];
+
+    await new Promise(resolve => setTimeout(resolve, 800));
 
     if (fileExists) {
       setShowDeleteAlert(true);
